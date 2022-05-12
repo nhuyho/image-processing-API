@@ -7,7 +7,6 @@ Start coding by: Nhu Y Ho
 - Remove git remote
 - Add new git remote to new service repo
 - Update project name at (package.json, newrelic, JenkinsFile,...)
-- Start implement route and handler at /src/plugins/routes
 
 ## Dependencies 
 

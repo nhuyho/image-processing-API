@@ -42,7 +42,7 @@ HTTP method: GET.
 
 #### Sample request:
 ```
-http://localhost:3000/images?file=santamonica.jpg&width=400&height=700
+http://localhost:3000/api/images?file=santamonica.jpg&width=400&height=700
 
 ## References
 

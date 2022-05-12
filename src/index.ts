@@ -25,4 +25,7 @@ app.get('/api/images', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Express server listening on port http://localhost:${port}`);
+  console.log(
+    `Example API http://localhost:${port}/api/images?file=santamonica.jpg&width=400&height=700`
+  );
 });

@@ -1,22 +1,17 @@
-import {
-  DisplayProcessor,
-  SpecReporter,
-  StacktraceOption,
-} from "jasmine-spec-reporter";
-import SuiteInfo = jasmine.SuiteInfo;
+import request from 'supertest';
+import { app } from '../index';
 
-class CustomProcessor extends DisplayProcessor {
-  public displayJasmineStarted(info: SuiteInfo, log: string): string {
-    return `${log}`;
-  }
-}
+describe('Test app server', () => {
+  it("Request '/images' should return status 200", async () => {
+    const result = await request(app)
+      .get('/images?file=santamonica.jpg&width=200&height=200')
+      .send();
 
-jasmine.getEnv().clearReporters();
-jasmine.getEnv().addReporter(
-  new SpecReporter({
-    spec: {
-      displayStacktrace: StacktraceOption.NONE,
-    },
-    customProcessors: [CustomProcessor],
-  })
-);
+    expect(result.status).toBe(200);
+  });
+
+  it('get the api/image end point ', async () => {
+    const width = 200;
+    const height = 400;
+  });
+});

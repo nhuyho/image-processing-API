@@ -2,7 +2,7 @@ import fs from 'fs';
 import sharp from 'sharp';
 
 export const resize = (
-  path: any,
+  path: string,
   width: number | undefined,
   height: number | undefined
 ) => {
@@ -14,4 +14,13 @@ export const resize = (
   }
 
   return readStream.pipe(transform);
+};
+
+export const createThumbnail = (
+  file: string,
+  width: string,
+  height: string
+): string => {
+  const [filename, ext] = file.split('.');
+  return `${filename}_${width}_${height}.${ext}`;
 };

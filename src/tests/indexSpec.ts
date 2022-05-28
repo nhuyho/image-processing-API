@@ -1,11 +1,12 @@
-import request from 'supertest';
-import { app } from '../index';
+import supertest from 'supertest';
+import app from '../app';
+const request: supertest.SuperTest<supertest.Test> = supertest(app);
 
-describe('Test app server', () => {
-  it("Request '/images' should return status 200", async () => {
-    const result = await request(app)
-      .get('/api/images?file=santamonica.jpg&width=200&height=200')
-      .send();
-    expect(result.status).toBe(200);
+describe('endpoint: /api/images', (): void => {
+  it('gets /api/images?filename=fjord&width=200&height=300', async (): Promise<void> => {
+    const response: supertest.Response = await request.get(
+      '/api/images?filename=fjord&width=199&height=199'
+    );
+    expect(response.status).toBe(200);
   });
 });

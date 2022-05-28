@@ -4,7 +4,7 @@
     "description": "An image processing API that resizes and saves images to user specifications when visiting a URL",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/index.ts",
+        "start": "nodemon src/app.ts",
         "build": "npx tsc",
         "start:prod": "npm run build && node dist/index.js",
         "lint": "eslint .",
@@ -36,17 +36,19 @@
         "eslint": "^8.15.0",
         "nodemon": "^2.0.16",
         "prettier": "2.6.2",
+        "sharp": "^0.30.4",
         "ts-node": "^10.7.0",
-        "typescript": "^4.6.4"
+        "typescript": "^4.6.4",
+        "shelljs": "^0.8.4"
     },
     "dependencies": {
+        "ejs": "^3.1.6",
         "dotenv": "^16.0.1",
         "express": "^4.18.1",
         "gulp": "^4.0.2",
         "jasmine": "^4.1.0",
         "jasmine-spec-reporter": "^7.0.0",
         "morgan": "^1.10.0",
-        "sharp": "^0.30.4",
         "supertest": "^6.2.3"
     }
 }

@@ -7,7 +7,6 @@ Start coding by: Nhu Y Ho
 - Remove git remote
 - Add new git remote to new service repo
 - Update project name at (package.json, newrelic, JenkinsFile,...)
-- Start implement route and handler at /src/plugins/routes
 
 ## Dependencies 
 
@@ -44,6 +43,7 @@ HTTP method: GET.
 #### Sample request:
 ```
 http://localhost:3000/api/images?filename=encenadaport&height=700&width=400
+
 
 ## References
 

@@ -24,7 +24,7 @@ npm run build
 
 Start the Server:
 ```
-npm start
+npm run start
 ```
 This command will run the server  on port 3000. 
 

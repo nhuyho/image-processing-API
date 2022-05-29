@@ -1,10 +1,36 @@
 import express from 'express';
-// import images from './api/images';
 import { promises as fsPromises } from 'fs';
-
 import fs from 'fs';
 import path from 'path';
 import { resizeImage, resizeImagePath } from '../utils/imageTransforms';
+
+interface ImageQuery {
+  filename?: string;
+  width?: string;
+  height?: string;
+}
+
+const validate = (query: ImageQuery) => {
+  if (!query.filename) {
+    return `Please pass a valid filename in the 'filename' query segment.`;
+  }
+
+  if (!query.width && !query.height) {
+    return null;
+  }
+
+  const width: number = parseInt(query.width || '');
+  if (Number.isNaN(width) || width < 1) {
+    return "Please provide a positive numerical value for the 'width' query segment.";
+  }
+
+  const height: number = parseInt(query.height || '');
+  if (Number.isNaN(height) || height < 1) {
+    return "Please provide a positive numerical value for the 'height' query segment.";
+  }
+
+  return null;
+};
 
 const routes = express.Router();
 
@@ -15,11 +41,17 @@ routes.get('/', async (req: express.Request, res: express.Response) => {
     const width = parseInt(req.query.width as unknown as string);
     const outputPath: string = resizeImagePath(filename, height, width);
 
+    const validationMessage: null | string = await validate(req.query);
+
+    if (validationMessage) {
+      res.send(validationMessage);
+      return;
+    }
+
     if (!fs.existsSync(outputPath)) {
       const resizedImage = await resizeImage(filename, height, width);
       await fsPromises.writeFile(outputPath, resizedImage);
     }
-
     res.sendFile(path.resolve(outputPath));
   } catch (err: any) {
     res.render('errors', { message: err.message });

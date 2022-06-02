@@ -52,7 +52,11 @@ routes.get('/', async (req: express.Request, res: express.Response) => {
       const resizedImage = await resizeImage(filename, height, width);
       await fsPromises.writeFile(outputPath, resizedImage);
     }
-    res.sendFile(path.resolve(outputPath));
+    if (outputPath) {
+      res.sendFile(path.resolve(outputPath));
+    } else {
+      res.send('This should not have happened!');
+    }
   } catch (err: any) {
     res.render('errors', { message: err.message });
   }

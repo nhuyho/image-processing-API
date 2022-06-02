@@ -6,7 +6,7 @@ Start coding by: Nhu Y Ho
 - Clone this repo : https://github.com/nhuyho/image-processing-API.git;
 - Remove git remote
 - Add new git remote to new service repo
-- Update project name at (package.json, newrelic, JenkinsFile,...)
+- Update project name at (package.json, newrelic,...)
 
 ## Dependencies 
 

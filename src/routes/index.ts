@@ -3,6 +3,8 @@ import { promises as fsPromises } from 'fs';
 import fs from 'fs';
 import path from 'path';
 import { resizeImage, resizeImagePath } from '../utils/imageTransforms';
+import getAvailableImageNames from './file';
+const routes = express.Router();
 
 interface ImageQuery {
   filename?: string;
@@ -10,9 +12,12 @@ interface ImageQuery {
   height?: string;
 }
 
-const validate = (query: ImageQuery) => {
+const validate = async (query: ImageQuery): Promise<null | string> => {
   if (!query.filename) {
-    return `Please pass a valid filename in the 'filename' query segment.`;
+    const availableImageNames: string = (await getAvailableImageNames()).join(
+      ', '
+    );
+    return `Please pass a valid filename in the 'filename' query segment. Available filenames are: ${availableImageNames}.`;
   }
 
   if (!query.width && !query.height) {
@@ -31,8 +36,6 @@ const validate = (query: ImageQuery) => {
 
   return null;
 };
-
-const routes = express.Router();
 
 routes.get('/', async (req: express.Request, res: express.Response) => {
   try {
